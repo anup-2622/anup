@@ -53,7 +53,7 @@ export default function Portfolio() {
           </h1>
           
           <div className="hidden md:flex gap-8 items-center">
-            {['Work', 'Skills', 'Experience', 'Education', 'Contact'].map((item) => (
+            {/* {['Work', 'Skills', 'Experience', 'Education', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => setActiveSection(item.toLowerCase())}
@@ -66,7 +66,7 @@ export default function Portfolio() {
                   activeSection === item.toLowerCase() ? 'w-full' : 'w-0 group-hover:w-full'
                 }`} />
               </button>
-            ))}
+            ))} */}
             <a 
               href="mailto:anupk2622@gmail.com"
               className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105"
@@ -82,7 +82,7 @@ export default function Portfolio() {
 
         {isMenuOpen && (
           <div className="md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/5 px-6 py-6 flex flex-col gap-4">
-            {['Work', 'Skills', 'Experience', 'Education', 'Contact'].map((item) => (
+            {/* {['Work', 'Skills', 'Experience', 'Education', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => {
@@ -93,7 +93,13 @@ export default function Portfolio() {
               >
                 {item}
               </button>
-            ))}
+            ))} */}
+               <a 
+              href="mailto:anupk2622@gmail.com"
+           className="text-center text-slate-300 hover:text-blue-400 transition-colors "
+              >
+              Hire Me
+            </a>
           </div>
         )}
       </nav>
@@ -126,7 +132,7 @@ export default function Portfolio() {
               </div>
               <div className="flex items-center gap-3 text-slate-300 bg-white/5 px-4 py-2.5 rounded-xl backdrop-blur-sm border border-white/10">
                 <Mail size={18} className="text-cyan-400" />
-                <span><a  href="mailto:anupk2622@gmail.com"></a></span>
+                <span><a  href="mailto:anupk2622@gmail.com">anupk2622@gmail.com</a></span>
               </div>
               <div className="flex items-center gap-3 text-slate-300 bg-white/5 px-4 py-2.5 rounded-xl backdrop-blur-sm border border-white/10">
                 <MapPin size={18} className="text-purple-400" />
