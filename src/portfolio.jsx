@@ -65,8 +65,10 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       months += 12;
     }
   }
+     let exp = years+'.'+months;
 
-  return {years,months};
+    console.log(exp , "new Exp")
+  return exp;
 }
 
   console.log("date", experience)
