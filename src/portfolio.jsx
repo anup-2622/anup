@@ -26,7 +26,7 @@ export default function Portfolio() {
   }, []);
 
 
-  useEffact(()=>{
+  useEffect(()=>{
 
     const today = new Date();
 const yyyy = today.getFullYear();
