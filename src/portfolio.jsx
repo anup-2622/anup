@@ -16,6 +16,7 @@ export default function Portfolio() {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      
     };
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
@@ -37,6 +38,7 @@ if (dd < 10) dd = '0' + dd;
 if (mm < 10) mm = '0' + mm;
 
 const formattedToday = dd + '-' + mm + '-' + yyyy;
+    getDateDifference(formattedToday , startDate)
     setExperience(getDateDifference(formattedToday , startDate))
   },[])
 
