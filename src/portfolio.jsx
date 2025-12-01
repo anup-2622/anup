@@ -37,7 +37,7 @@ if (dd < 10) dd = '0' + dd;
 if (mm < 10) mm = '0' + mm;
 
 const formattedToday = dd + '-' + mm + '-' + yyyy;
-    setExperience(getDateDifference(formattedToday , startDate)
+    setExperience(getDateDifference(formattedToday , startDate))
   },[])
 
 
