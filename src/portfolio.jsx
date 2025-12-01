@@ -1,90 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, ArrowRight, Code2, Palette, Layers, Sparkles, MousePointer2, Database, Phone, MapPin, Calendar, Users, TrendingUp, Shield, Zap, Award, Target } from 'lucide-react';
-import { education, experience, projects, skills, stats, technicalSkills } from './util/portfolioUtil';
+import React, { useState, useEffect } from "react";
+import {
+  Menu,
+  X,
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  ArrowRight,
+  Code2,
+  Palette,
+  Layers,
+  Sparkles,
+  MousePointer2,
+  Database,
+  Phone,
+  MapPin,
+  Calendar,
+  Users,
+  TrendingUp,
+  Shield,
+  Zap,
+  Award,
+  Target,
+} from "lucide-react";
+import {
+  education,
+  experience,
+  projects,
+  skills,
+  stats,
+  technicalSkills,
+} from "./util/portfolioUtil";
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const [experience ,setExperience] = useState(0)
-  
-  const startDate = "08-08-2023";
+  const [experienceYear, setExperienceYear] = useState(0);
+
+  const startDate = new Date("08-08-2023");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      
     };
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-
-  useEffect(()=>{
-
+  useEffect(() => {
     const today = new Date();
-const yyyy = today.getFullYear();
-let mm = today.getMonth() + 1; // Months start at 0!
-let dd = today.getDate();
-
-if (dd < 10) dd = '0' + dd;
-if (mm < 10) mm = '0' + mm;
-
-const formattedToday = dd + '-' + mm + '-' + yyyy;
-    getDateDifference(formattedToday , startDate)
-    setExperience(getDateDifference(formattedToday , startDate))
-  },[])
-
+    setExperienceYear(getDateDifference(today, startDate));
+  }, []);
 
   function getDateDifference(date1, date2) {
-  // Ensure date1 is earlier than date2 for consistent calculation
-  if (date1 > date2) {
-    [date1, date2] = [date2, date1]; // Swap dates
-  }
+    if (date1 > date2) {
+      [date1, date2] = [date2, date1]; // Swap dates
+    }
 
-  let years = date2.getFullYear() - date1.getFullYear();
-  let months = date2.getMonth() - date1.getMonth();
+    let years = date2.getFullYear() - date1.getFullYear();
 
-  // Adjust months and years if months is negative
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
+    let months = date2.getMonth() - date1.getMonth();
 
-  // Handle cases where the day of the month in date2 is earlier than date1
-  // This means a full month hasn't passed yet in the current month segment
-  if (date2.getDate() < date1.getDate()) {
-    months--;
     if (months < 0) {
       years--;
       months += 12;
     }
-  }
-     let exp = years+'.'+months;
 
+    if (date2.getDate() < date1.getDate()) {
+      months--;
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+    }
+    let exp = years + "." + months;
     console.log(exp , "new Exp")
-  return exp;
-}
-
-  console.log("date", experience)
+    return exp;
+  }
 
   return (
     <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div 
+        <div
           className="absolute w-96 h-96 bg-blue-500/20 rounded-full blur-3xl transition-all duration-300"
-          style={{ 
-            left: `${mousePosition.x - 192}px`, 
+          style={{
+            left: `${mousePosition.x - 192}px`,
             top: `${mousePosition.y - 192}px`,
-            transform: 'translate(-50%, -50%)'
+            transform: "translate(-50%, -50%)",
           }}
         />
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
@@ -92,16 +103,20 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       </div>
 
       {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-slate-900/90 backdrop-blur-xl shadow-lg shadow-blue-500/5 border-b border-white/5' : 'bg-transparent'
-      }`}>
+      <nav
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-slate-900/90 backdrop-blur-xl shadow-lg shadow-blue-500/5 border-b border-white/5"
+            : "bg-transparent"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex justify-between items-center">
           <h1 className="text-2xl font-bold">
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
               Anup Kumar
             </span>
           </h1>
-          
+
           <div className="hidden md:flex gap-8 items-center">
             {/* {['Work', 'Skills', 'Experience', 'Education', 'Contact'].map((item) => (
               <button
@@ -117,7 +132,7 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                 }`} />
               </button>
             ))} */}
-            <a 
+            <a
               href="mailto:anupk2622@gmail.com"
               className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105"
             >
@@ -125,7 +140,10 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
             </a>
           </div>
 
-          <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -144,10 +162,10 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                 {item}
               </button>
             ))} */}
-               <a 
+            <a
               href="mailto:anupk2622@gmail.com"
-           className="text-center text-slate-300 hover:text-blue-400 transition-colors "
-              >
+              className="text-center text-slate-300 hover:text-blue-400 transition-colors "
+            >
               Hire Me
             </a>
           </div>
@@ -160,7 +178,7 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 text-blue-300 px-5 py-2.5 rounded-full text-sm font-semibold mb-8 backdrop-blur-sm">
               <Sparkles size={16} className="animate-pulse" />
-              2.2+ Years Experience • Available for Opportunities
+            {experienceYear}+ Years Experience • Available for Opportunities
             </div>
             <h2 className="text-6xl lg:text-8xl font-bold mb-8 leading-tight">
               <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent">
@@ -172,9 +190,11 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
               </span>
             </h2>
             <p className="text-xl lg:text-2xl text-slate-300 mb-10 leading-relaxed max-w-3xl">
-              Crafting scalable web and mobile applications that serve thousands of users. Specialized in React, Node.js, and modern JavaScript technologies.
+              Crafting scalable web and mobile applications that serve thousands
+              of users. Specialized in React, Node.js, and modern JavaScript
+              technologies.
             </p>
-            
+
             <div className="flex flex-wrap gap-6 mb-10">
               <div className="flex items-center gap-3 text-slate-300 bg-white/5 px-4 py-2.5 rounded-xl backdrop-blur-sm border border-white/10">
                 <Phone size={18} className="text-blue-400" />
@@ -182,7 +202,9 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
               </div>
               <div className="flex items-center gap-3 text-slate-300 bg-white/5 px-4 py-2.5 rounded-xl backdrop-blur-sm border border-white/10">
                 <Mail size={18} className="text-cyan-400" />
-                <span><a  href="mailto:anupk2622@gmail.com">anupk2622@gmail.com</a></span>
+                <span>
+                  <a href="mailto:anupk2622@gmail.com">anupk2622@gmail.com</a>
+                </span>
               </div>
               <div className="flex items-center gap-3 text-slate-300 bg-white/5 px-4 py-2.5 rounded-xl backdrop-blur-sm border border-white/10">
                 <MapPin size={18} className="text-purple-400" />
@@ -191,14 +213,17 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <a 
+              <a
                 href="#work"
                 className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-10 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-blue-500/50 transition-all flex items-center gap-3 group hover:scale-105"
               >
                 View Projects
-                <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                <ArrowRight
+                  size={20}
+                  className="group-hover:translate-x-2 transition-transform"
+                />
               </a>
-              <a 
+              <a
                 href="mailto:anupk2622@gmail.com"
                 className="bg-white/5 backdrop-blur-sm border-2 border-white/10 px-10 py-4 rounded-xl font-semibold hover:bg-white/10 hover:border-white/20 transition-all"
               >
@@ -215,7 +240,7 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
               <code>{`const developer = {
   name: "Anup Kumar",
   role: "Full Stack",
-  experience: "2.2 years",
+  experience: ${experienceYear} Years,
   passion: "Scalable Apps"
 };`}</code>
             </pre>
@@ -249,19 +274,31 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       <section className="relative py-24 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-4xl">
-            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">About Me</h3>
+            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">
+              About Me
+            </h3>
             <h4 className="text-5xl font-bold mb-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Turning Ideas into Reality
             </h4>
             <div className="space-y-6 text-lg text-slate-300 leading-relaxed">
               <p className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                Software developer with 2.2 years of hands-on experience in implementing and supporting mission-critical business solutions. I specialize in full-stack development with expertise in React, Node.js, and modern JavaScript frameworks.
+                Software developer with {experienceYear} years of hands-on experience in
+                implementing and supporting mission-critical business solutions.
+                I specialize in full-stack development with expertise in React,
+                Node.js, and modern JavaScript frameworks.
               </p>
               <p className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                My technical expertise includes advanced concepts such as asynchronous programming, higher-order functions, ES6+ features, inheritance, polymorphism, and design pattern implementation. I have successfully delivered projects serving thousands of users with focus on scalability, performance, and user experience.
+                My technical expertise includes advanced concepts such as
+                asynchronous programming, higher-order functions, ES6+ features,
+                inheritance, polymorphism, and design pattern implementation. I
+                have successfully delivered projects serving thousands of users
+                with focus on scalability, performance, and user experience.
               </p>
               <p className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-                Currently working at Schoofi Software Solution, where I lead development of enterprise applications and have resolved 55+ production bugs while implementing critical features from scratch.
+                Currently working at Schoofi Software Solution, where I lead
+                development of enterprise applications and have resolved 55+
+                production bugs while implementing critical features from
+                scratch.
               </p>
             </div>
           </div>
@@ -272,12 +309,14 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       <section className="relative py-24 px-6 lg:px-8 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">Technical Expertise</h3>
+            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">
+              Technical Expertise
+            </h3>
             <h4 className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Skills & Technologies
             </h4>
           </div>
-          
+
           <div className="grid lg:grid-cols-3 gap-8 mb-16">
             <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 p-8 rounded-3xl border border-blue-500/20 backdrop-blur-sm hover:border-blue-500/40 transition-all group">
               <div className="flex items-center gap-3 mb-8">
@@ -290,8 +329,12 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                 {skills.frontend.map((skill, index) => (
                   <div key={index}>
                     <div className="flex justify-between mb-2">
-                      <span className="font-medium text-slate-300">{skill.name}</span>
-                      <span className="text-blue-400 font-bold">{skill.level}%</span>
+                      <span className="font-medium text-slate-300">
+                        {skill.name}
+                      </span>
+                      <span className="text-blue-400 font-bold">
+                        {skill.level}%
+                      </span>
                     </div>
                     <div className="h-2.5 bg-slate-800/50 rounded-full overflow-hidden border border-white/5">
                       <div
@@ -315,8 +358,12 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                 {skills.backend.map((skill, index) => (
                   <div key={index}>
                     <div className="flex justify-between mb-2">
-                      <span className="font-medium text-slate-300">{skill.name}</span>
-                      <span className="text-purple-400 font-bold">{skill.level}%</span>
+                      <span className="font-medium text-slate-300">
+                        {skill.name}
+                      </span>
+                      <span className="text-purple-400 font-bold">
+                        {skill.level}%
+                      </span>
                     </div>
                     <div className="h-2.5 bg-slate-800/50 rounded-full overflow-hidden border border-white/5">
                       <div
@@ -340,8 +387,12 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                 {skills.tools.map((skill, index) => (
                   <div key={index}>
                     <div className="flex justify-between mb-2">
-                      <span className="font-medium text-slate-300">{skill.name}</span>
-                      <span className="text-indigo-400 font-bold">{skill.level}%</span>
+                      <span className="font-medium text-slate-300">
+                        {skill.name}
+                      </span>
+                      <span className="text-indigo-400 font-bold">
+                        {skill.level}%
+                      </span>
                     </div>
                     <div className="h-2.5 bg-slate-800/50 rounded-full overflow-hidden border border-white/5">
                       <div
@@ -359,10 +410,18 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
             {technicalSkills.map((category, index) => {
               const Icon = category.icon;
               return (
-                <div key={index} className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all group">
+                <div
+                  key={index}
+                  className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all group"
+                >
                   <div className="flex items-center gap-3 mb-4">
-                    <Icon className="text-blue-400 group-hover:scale-110 transition-transform" size={20} />
-                    <h6 className="font-bold text-white">{category.category}</h6>
+                    <Icon
+                      className="text-blue-400 group-hover:scale-110 transition-transform"
+                      size={20}
+                    />
+                    <h6 className="font-bold text-white">
+                      {category.category}
+                    </h6>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill, i) => (
@@ -385,7 +444,9 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       <section id="work" className="relative py-24 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">Portfolio</h3>
+            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">
+              Portfolio
+            </h3>
             <h4 className="text-5xl font-bold mb-4 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Featured Projects
             </h4>
@@ -407,15 +468,21 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 mix-blend-multiply`} />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30 mix-blend-multiply`}
+                    />
                   </div>
                   <div className="p-8 lg:p-12">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className={`text-sm font-semibold bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}>
+                      <span
+                        className={`text-sm font-semibold bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent`}
+                      >
                         {project.category}
                       </span>
                       <span className="text-slate-600">•</span>
-                      <span className="text-sm text-slate-400">{project.company}</span>
+                      <span className="text-sm text-slate-400">
+                        {project.company}
+                      </span>
                     </div>
                     <h5 className="text-3xl font-bold mb-4 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all">
                       {project.title}
@@ -423,7 +490,7 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                     <p className="text-slate-300 mb-6 leading-relaxed text-lg">
                       {project.description}
                     </p>
-                    
+
                     <div className="mb-6">
                       <h6 className="font-semibold text-white mb-4 flex items-center gap-2">
                         <Zap className="text-blue-400" size={18} />
@@ -431,7 +498,10 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                       </h6>
                       <ul className="space-y-3">
                         {project.achievements.map((achievement, i) => (
-                          <li key={i} className="flex items-start gap-3 text-slate-300">
+                          <li
+                            key={i}
+                            className="flex items-start gap-3 text-slate-300"
+                          >
                             <span className="w-6 h-6 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                               <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
                             </span>
@@ -463,7 +533,9 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       <section className="relative py-24 px-6 lg:px-8 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">Career</h3>
+            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">
+              Career
+            </h3>
             <h4 className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Work Experience
             </h4>
@@ -471,10 +543,15 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
 
           <div className="max-w-4xl mx-auto">
             {experience.map((exp, index) => (
-              <div key={index} className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-10 lg:p-12 rounded-3xl border border-white/10 backdrop-blur-sm">
+              <div
+                key={index}
+                className="bg-gradient-to-br from-slate-900/50 to-slate-800/30 p-10 lg:p-12 rounded-3xl border border-white/10 backdrop-blur-sm"
+              >
                 <div className="flex flex-wrap justify-between items-start gap-4 mb-6">
                   <div>
-                    <h5 className="text-3xl font-bold text-white mb-3">{exp.role}</h5>
+                    <h5 className="text-3xl font-bold text-white mb-3">
+                      {exp.role}
+                    </h5>
                     <p className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
                       {exp.company}
                     </p>
@@ -491,7 +568,7 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                 <p className="text-slate-300 mb-8 leading-relaxed text-lg">
                   {exp.description}
                 </p>
-                
+
                 <div>
                   <h6 className="font-semibold text-white mb-4 flex items-center gap-2">
                     <TrendingUp className="text-blue-400" size={18} />
@@ -499,7 +576,10 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                   </h6>
                   <ul className="space-y-3">
                     {exp.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-start gap-3 text-slate-300">
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-slate-300"
+                      >
                         <span className="w-6 h-6 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
                         </span>
@@ -518,7 +598,9 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       <section className="relative py-24 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">Education</h3>
+            <h3 className="text-sm font-semibold text-blue-400 mb-3 uppercase tracking-widest">
+              Education
+            </h3>
             <h4 className="text-5xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
               Academic Background
             </h4>
@@ -527,7 +609,9 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
           <div className="max-w-4xl mx-auto bg-gradient-to-br from-blue-500/10 to-cyan-500/10 p-10 lg:p-12 rounded-3xl border border-blue-500/20 backdrop-blur-sm">
             <div className="flex flex-wrap justify-between items-start gap-4 mb-8">
               <div>
-                <h5 className="text-3xl font-bold text-white mb-3">{education.degree}</h5>
+                <h5 className="text-3xl font-bold text-white mb-3">
+                  {education.degree}
+                </h5>
                 <p className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                   {education.institution}
                 </p>
@@ -537,7 +621,7 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
                 {education.period}
               </span>
             </div>
-            
+
             <div>
               <h6 className="font-semibold text-white mb-5 flex items-center gap-2">
                 <Award className="text-blue-400" size={18} />
@@ -545,7 +629,10 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
               </h6>
               <div className="grid md:grid-cols-2 gap-4">
                 {education.coursework.map((course, i) => (
-                  <div key={i} className="flex items-center gap-3 text-slate-300 bg-white/5 px-4 py-3 rounded-xl border border-white/10">
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 text-slate-300 bg-white/5 px-4 py-3 rounded-xl border border-white/10"
+                  >
                     <span className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></span>
                     <span>{course}</span>
                   </div>
@@ -563,21 +650,34 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
             Let's Build Something Amazing
           </h3>
           <p className="text-xl lg:text-2xl text-slate-300 mb-12 leading-relaxed">
-            I'm currently available for full-time opportunities and freelance projects. Let's discuss how I can contribute to your team or project.
+            I'm currently available for full-time opportunities and freelance
+            projects. Let's discuss how I can contribute to your team or
+            project.
           </p>
-          
+
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <a href="mailto:anupk2622@gmail.com" className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all group">
+            <a
+              href="mailto:anupk2622@gmail.com"
+              className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all group"
+            >
               <Mail className="w-10 h-10 mb-4 mx-auto text-blue-400 group-hover:scale-110 transition-transform" />
               <div className="font-bold text-white mb-2">Email</div>
               <div className="text-sm text-slate-300">anupk2622@gmail.com</div>
             </a>
-            <a href="tel:+919470899107" className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all group">
+            <a
+              href="tel:+919470899107"
+              className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all group"
+            >
               <Phone className="w-10 h-10 mb-4 mx-auto text-cyan-400 group-hover:scale-110 transition-transform" />
               <div className="font-bold text-white mb-2">Phone</div>
               <div className="text-sm text-slate-300">+91 9470899107</div>
             </a>
-            <a href="https://www.linkedin.com/in/anup-kumar-4987821a3/" target="_blank" rel="noopener noreferrer" className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all group">
+            <a
+              href="https://www.linkedin.com/in/anup-kumar-4987821a3/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all group"
+            >
               <Linkedin className="w-10 h-10 mb-4 mx-auto text-purple-400 group-hover:scale-110 transition-transform" />
               <div className="font-bold text-white mb-2">LinkedIn</div>
               <div className="text-sm text-slate-300">Connect with me</div>
@@ -585,10 +685,18 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
           </div>
 
           <div className="flex justify-center gap-4">
-            <a href="mailto:anupk2622@gmail.com" className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-10 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-blue-500/50 transition-all hover:scale-105">
+            <a
+              href="mailto:anupk2622@gmail.com"
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-10 py-4 rounded-xl font-semibold hover:shadow-2xl hover:shadow-blue-500/50 transition-all hover:scale-105"
+            >
               Send Message
             </a>
-            <a href="https://www.linkedin.com/in/anup-kumar-4987821a3/" target="_blank" rel="noopener noreferrer" className="bg-white/10 backdrop-blur-sm border-2 border-white/20 px-10 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all">
+            <a
+              href="https://www.linkedin.com/in/anup-kumar-4987821a3/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/10 backdrop-blur-sm border-2 border-white/20 px-10 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all"
+            >
               View LinkedIn
             </a>
           </div>
@@ -598,15 +706,30 @@ const formattedToday = dd + '-' + mm + '-' + yyyy;
       {/* Footer */}
       <footer className="relative py-10 px-6 lg:px-8 border-t border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-400">© 2025 Anup Kumar. All rights reserved.</p>
+          <p className="text-slate-400">
+            © 2025 Anup Kumar. All rights reserved.
+          </p>
           <div className="flex gap-6">
-            <a href="https://github.com/anup-2622" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400 transition-colors">
+            <a
+              href="https://github.com/anup-2622"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+            >
               <Github size={22} />
             </a>
-            <a href="https://www.linkedin.com/in/anup-kumar-4987821a3/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400 transition-colors">
+            <a
+              href="https://www.linkedin.com/in/anup-kumar-4987821a3/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+            >
               <Linkedin size={22} />
             </a>
-            <a href="mailto:anupk2622@gmail.com" className="text-slate-400 hover:text-blue-400 transition-colors">
+            <a
+              href="mailto:anupk2622@gmail.com"
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+            >
               <Mail size={22} />
             </a>
           </div>
