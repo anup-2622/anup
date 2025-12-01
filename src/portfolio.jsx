@@ -8,6 +8,10 @@ export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  const [experience ,setExperience] = useState(0)
+  
+  const startDate = "08-08-2023";
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     const handleMouseMove = (e) => {
@@ -22,8 +26,50 @@ export default function Portfolio() {
   }, []);
 
 
+  useEffact(()=>{
+
+    const today = new Date();
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+
+const formattedToday = dd + '-' + mm + '-' + yyyy;
+    setExperience(getDateDifference(formattedToday , startDate)
+  },[])
 
 
+  function getDateDifference(date1, date2) {
+  // Ensure date1 is earlier than date2 for consistent calculation
+  if (date1 > date2) {
+    [date1, date2] = [date2, date1]; // Swap dates
+  }
+
+  let years = date2.getFullYear() - date1.getFullYear();
+  let months = date2.getMonth() - date1.getMonth();
+
+  // Adjust months and years if months is negative
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  // Handle cases where the day of the month in date2 is earlier than date1
+  // This means a full month hasn't passed yet in the current month segment
+  if (date2.getDate() < date1.getDate()) {
+    months--;
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+  }
+
+  return {years,months};
+}
+
+  console.log("date", experience)
 
   return (
     <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
