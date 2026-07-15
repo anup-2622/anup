@@ -112,7 +112,7 @@ export const stats = [
   // { icon: Users, value: "2000+", label: "Active Users Served" },
   // { icon: Code2, value: "55+", label: "Bugs Resolved" },
   // { icon: Zap, value: "3", label: "Major Projects" },
-  { icon: Award, value: "2.2", label: "Years Experience" }
+  { icon: Award, value: "2.2", label: "Years Experience", dynamic: true }
 ];
 
 export const technicalSkills = [

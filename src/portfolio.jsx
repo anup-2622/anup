@@ -73,7 +73,7 @@ const AnimatedCounter = ({ value, duration = 2000 }) => {
     <span ref={ref} className="font-mono tabular-nums">
       {Number.isInteger(parseFloat(value))
         ? Math.round(count)
-        : count.toFixed(1)}
+        : count.toFixed(2)}
     </span>
   );
 };
@@ -405,6 +405,8 @@ export default function Portfolio() {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                 {stats.map((stat, index) => {
                   const Icon = stat.icon;
+                  const dynamicValue = stat.dynamic ? experienceYear : stat.value;
+                  console.log(dynamicValue);
                   return (
                     <div key={index} className="text-center group cursor-default">
                       <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-500/15 to-orange-500/15 rounded-2xl mb-5 group-hover:scale-110 group-hover:shadow-gold transition-all duration-500 border border-amber-500/20">
@@ -412,7 +414,7 @@ export default function Portfolio() {
                       </div>
                       <div className="text-4xl lg:text-5xl font-extrabold mb-2 font-mono">
                         <span className="gradient-text-primary">
-                          <AnimatedCounter value={stat.value} />
+                          <AnimatedCounter value={dynamicValue} />
                         </span>
                         <span className="text-amber-400/50 text-2xl">+</span>
                       </div>
