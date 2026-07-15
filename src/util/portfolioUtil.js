@@ -126,17 +126,25 @@ export const technicalSkills = [
 
 export const experience = [
   {
-    role: "Software Developer",
-    company: "Schoofi Software Solution Pvt Ltd",
+    role: "Data Engineer",
+    company: "Schoofi Software Solutions Pvt. Ltd.",
     location: "Delhi, India",
-    period: "Aug 2023 - Present",
-    description: "Leading development of mission-critical business solutions with focus on scalability and performance. Working on both web and mobile platforms serving thousands of users.",
+    period: "January 2024 – Present",
     highlights: [
-      "Developed QR-based feedback system for 2000+ users",
-      "Built work permit feature and trend analysis dashboard",
-      "Migrated mobile API to NestJS with improved scalability",
-      "Implemented geofencing and real-time tracking features",
-      "Resolved 55+ production bugs and optimized performance"
+      "Designed ETL pipelines to consolidate multi-outlet audit data into a centralized MySQL data warehouse, powering BI reporting.",
+      "Automated data ingestion workflows via Python and Shell scripting, cutting manual effort by 60% and boosting pipeline reliability.",
+      "Authored complex SQL analytical queries for KPI tracking, trend analysis, and compliance metrics consumed by business stakeholders."
+    ]
+  },
+  {
+    role: "Software Engineer",
+    company: "Schoofi Software Solutions Pvt. Ltd.",
+    location: "Delhi, India",
+    period: "August 2023 – January 2024",
+    highlights: [
+      "Built a scalable Auditing platform with JavaScript, NestJS, jQuery, and MySQL, supporting real-time compliance tracking across multiple retail outlets.",
+      "Engineered data visualization dashboards and optimized SQL queries, cutting page load times and delivering actionable real-time analytics.",
+      "Shipped cross-platform mobile features in React Native and drove CI/CD improvements within an Agile team."
     ]
   }
 ];

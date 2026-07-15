@@ -786,9 +786,11 @@ export default function Portfolio() {
                         </span>
                       </div>
 
-                      <p className="text-slate-300 mb-8 leading-relaxed text-[15px]">
-                        {exp.description}
-                      </p>
+                      {exp.description && (
+                        <p className="text-slate-300 mb-8 leading-relaxed text-[15px]">
+                          {exp.description}
+                        </p>
+                      )}
 
                       <div>
                         <h4 className="font-semibold text-white mb-5 flex items-center gap-2 text-sm">
